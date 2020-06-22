@@ -18,7 +18,7 @@ class _FluetterTrips extends State<FluetterTrips>{
   final List<Widget> widgetsChildren = [
     HomeTrips(),
     SearchTrips(),
-    ProfileTrips()
+    ProfileTrips("Carlos Guzman", "xxxxxx@gmail.com")
   ];
 
   void onTapTapped(int index){

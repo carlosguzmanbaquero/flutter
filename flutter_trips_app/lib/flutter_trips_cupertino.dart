@@ -41,7 +41,7 @@ class FlutterTripsCupertino extends StatelessWidget {
               break;
             case 2:
               return CupertinoTabView(
-                builder: (BuildContext context) => ProfileTrips(),
+                builder: (BuildContext context) => ProfileTrips("Carlos Guzman", "xxxxxx@gmail.com"),
               );
               break;
 
