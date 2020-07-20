@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertripsapp/Place/model/place.dart';
+import 'package:fluttertripsapp/User/ui/widgets/profile_place_info.dart';
+import 'package:fluttertripsapp/User/ui/widgets/profile_place.dart';
 
-class CardImageDetail extends StatelessWidget{
+class ProfilePlace extends StatelessWidget {
 
-  final String title;
-  final String detail;
-  final String pathImage;
-  final int steps;
+  String image;
+  Place place;
 
-  CardImageDetail(this.title, this.detail,this.pathImage, this.steps);
+  ProfilePlace(this.image, this.place);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class CardImageDetail extends StatelessWidget{
 
       decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(pathImage),
+            image: AssetImage(this.image),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(20),
@@ -53,7 +54,7 @@ class CardImageDetail extends StatelessWidget{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                title,
+                this.place.name,
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold
@@ -62,7 +63,7 @@ class CardImageDetail extends StatelessWidget{
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
-                  detail,
+                  this.place.where,
                   style: TextStyle(
                       color: Colors.black45
                   ),
@@ -71,7 +72,7 @@ class CardImageDetail extends StatelessWidget{
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: Text(
-                  "Steps $steps",
+                  'Steps ${place.steps}',
                   style: TextStyle(
                     fontSize: 17,
                     color: Color.fromRGBO(232, 166, 90, 1),
@@ -100,4 +101,5 @@ class CardImageDetail extends StatelessWidget{
       ),
     );
   }
+
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home_trips.dart';
-import 'search_trips.dart';
-import 'profile_trips.dart';
+import 'Place/ui/screens/home_trips.dart';
+import 'Place/ui/screens/search_trips.dart';
+import 'User/ui/screens/profile_trips.dart';
 
 class FluetterTrips extends StatefulWidget{
 
@@ -18,7 +18,7 @@ class _FluetterTrips extends State<FluetterTrips>{
   final List<Widget> widgetsChildren = [
     HomeTrips(),
     SearchTrips(),
-    ProfileTrips("Carlos Guzman", "xxxxxx@gmail.com")
+    ProfileTrips()
   ];
 
   void onTapTapped(int index){

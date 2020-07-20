@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class FloatingActionButtonGreen extends StatefulWidget{
+class FloatingActionButtonGreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -9,21 +9,22 @@ class FloatingActionButtonGreen extends StatefulWidget{
 
 }
 
+
 class _FloatingActionButtonGreen extends State<FloatingActionButtonGreen>{
 
   bool toogle = false;
 
   void onPressedFav(){
 
-      Scaffold.of(context).showSnackBar(
-          SnackBar(
-            content: Text(!toogle?"Sitio agregado a favoritos":"Sitio eliminado de favoritos"),
-          )
-      );
+    Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text(!toogle?"Sitio agregado a favoritos":"Sitio eliminado de favoritos"),
+        )
+    );
 
-      setState(() {
-        toogle=!toogle;
-      });
+    setState(() {
+      toogle=!toogle;
+    });
 
   }
 
@@ -36,7 +37,7 @@ class _FloatingActionButtonGreen extends State<FloatingActionButtonGreen>{
       tooltip: "Fav",
       onPressed: onPressedFav,
       child: Icon(!toogle?
-        Icons.favorite_border:Icons.favorite
+      Icons.favorite_border:Icons.favorite
       ),
     );
   }
