@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertripsapp/User/bloc/bloc_user.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'Place/ui/screens/home_trips.dart';
 import 'Place/ui/screens/search_trips.dart';
 import 'User/ui/screens/profile_trips.dart';
 
-class FluetterTrips extends StatefulWidget{
+class FlutterTrips extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _FluetterTrips();
+    return _FlutterTrips();
   }
 }
 
-class _FluetterTrips extends State<FluetterTrips>{
+class _FlutterTrips extends State<FlutterTrips>{
 
   int indexTab=0;
   final List<Widget> widgetsChildren = [
     HomeTrips(),
     SearchTrips(),
-    ProfileTrips()
+    BlocProvider <UserBloc>(child: ProfileTrips(), bloc: UserBloc())
   ];
 
   void onTapTapped(int index){

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertripsapp/User/ui/screens/login.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'flutter_trips.dart';
 import 'package:fluttertripsapp/User/bloc/bloc_user.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       child: MaterialApp(
         title: 'Flutter Demo',
-        home: FluetterTrips(),
+        home: Login(),//FluetterTrips(),
         //home: FlutterTripsCupertino(),//MyHomePage(title: 'Flutter Demo Home Page'),
       ), 
       bloc: UserBloc());

@@ -1,12 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertripsapp/User/bloc/bloc_user.dart';
+import 'package:fluttertripsapp/User/model/user.dart';
 import 'package:fluttertripsapp/User/ui/widgets/user_info.dart';
 import 'package:fluttertripsapp/User/ui/widgets/button_bar.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
 class ProfileHeader extends StatelessWidget {
+
+  UserBloc userBloc;
+  User user;
+
   @override
   Widget build(BuildContext context) {
 
-    final title = Text(
+    userBloc = BlocProvider.of<UserBloc>(context);
+
+    return StreamBuilder(
+      stream: userBloc.streamFirebase,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+        switch(snapshot.connectionState){
+          case ConnectionState.waiting:
+            return CircularProgressIndicator();
+          case ConnectionState.none:
+            return CircularProgressIndicator();
+          case ConnectionState.active:
+            return showProfileData(snapshot);
+          case ConnectionState.done:
+            return showProfileData(snapshot);
+        }
+      },
+    );
+  }
+
+  Widget showProfileData(AsyncSnapshot snapshot){
+    if(!snapshot.hasData || snapshot.hasError){
+      print("No logueado");
+      return Container(
+      margin: EdgeInsets.only(
+          left: 20.0,
+          right: 20.0,
+          top: 50.0
+      ),
+      child: Column(
+        children: <Widget>[
+         CircularProgressIndicator(),
+         Text("Por favor loguearse")
+        ],
+      ),
+    );
+    }else{
+      print("logueado");
+      print(snapshot.data);
+      user = User(name: snapshot.data.displayName, email: snapshot.data.email, photo: snapshot.data.photoUrl);
+      final title = Text(
       'Profile',
       style: TextStyle(
           fontFamily: 'Anton-Regular',
@@ -29,11 +75,12 @@ class ProfileHeader extends StatelessWidget {
               title
             ],
           ),
-          UserInfo('assets/img/kartman.jpeg', 'Carlos Guzman','xxxxx@xxxxx'),
+          UserInfo(user),
           ButtonsBar()
         ],
       ),
     );
+    }
   }
 
 }
