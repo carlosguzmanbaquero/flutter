@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertripsapp/Place/model/place.dart';
 import 'package:fluttertripsapp/User/ui/widgets/profile_place_info.dart';
 import 'package:fluttertripsapp/User/ui/widgets/profile_place.dart';
+import 'package:fluttertripsapp/widgets/floating_action_button_green.dart';
 
 class ProfilePlace extends StatelessWidget {
 
@@ -82,12 +83,7 @@ class ProfilePlace extends StatelessWidget {
               )
             ],
           ),
-          FloatingActionButton(
-              onPressed: null,
-              mini: true,
-              child: Icon(Icons.favorite),
-              backgroundColor: Color.fromRGBO(102, 216, 105, 1)
-          )
+          FloatingActionButtonGreen(),
         ],
       ),
     );
