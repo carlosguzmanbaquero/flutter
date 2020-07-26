@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertripsapp/User/model/user.dart';
 import 'package:fluttertripsapp/widgets/button_green.dart';
 import 'package:fluttertripsapp/widgets/gradient_back.dart';
 import 'package:fluttertripsapp/User/bloc/bloc_user.dart';
@@ -17,9 +18,11 @@ class Login extends StatefulWidget {
 class _Login extends State<Login> {
 
   UserBloc userBloc;
+  double screenWidht;
 
   @override
   Widget build(BuildContext context) {
+    screenWidht = MediaQuery.of(context).size.width;
     userBloc = BlocProvider.of(context);
     return _handleCurrentSession();
   }
@@ -40,26 +43,45 @@ class _Login extends State<Login> {
   
 
   Widget signInGoogleUI(){
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          GradientBack("", null),
+          GradientBack(height:null),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Bienvenido a tu aplicación turistica",
-                style: TextStyle(
-                  fontSize: 37.0,
-                  fontFamily: "Anton-Regular",
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,  
+              Flexible(
+                child: Container(
+                  margin: EdgeInsets.only(
+                      left: 20.0,
+                      right: 20.0,
+                  ),
+                  width: screenWidht,
+                  child: Text("Bienvenido a tu aplicación turistica",
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontFamily: "Anton-Regular",
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
+
               ButtonGreen(text: "Login con Gmail", 
                 onPressed: (){
-                  //userBloc.signOut();
-                  userBloc.signIn().then((value) => print("usuario logueado ${value.displayName}"));
+                  userBloc.signOut();
+                  userBloc.signIn().then((value) {
+                    print("usuario logueado ${value.displayName}");
+                    userBloc.updateUserData(User(
+                        uid:value.uid,
+                        name:value.displayName,
+                        email:value.email,
+                        photo:value.photoUrl
+                    ));
+                  });
                 },
                 width: 300.0,
                 height: 50.0,

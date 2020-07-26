@@ -6,10 +6,9 @@ import 'package:fluttertripsapp/widgets/floating_action_button_green.dart';
 
 class ProfilePlace extends StatelessWidget {
 
-  String image;
   Place place;
 
-  ProfilePlace(this.image, this.place);
+  ProfilePlace(this.place);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class ProfilePlace extends StatelessWidget {
 
       decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(this.image),
+            image: NetworkImage(this.place.urlImage),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(20),
@@ -64,7 +63,7 @@ class ProfilePlace extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
-                  this.place.where,
+                  this.place.description,
                   style: TextStyle(
                       color: Colors.black45
                   ),
@@ -73,7 +72,7 @@ class ProfilePlace extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: Text(
-                  'Steps ${place.steps}',
+                  'Likes ${place.likes}',
                   style: TextStyle(
                     fontSize: 17,
                     color: Color.fromRGBO(232, 166, 90, 1),
