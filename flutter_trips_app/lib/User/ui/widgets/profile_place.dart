@@ -82,7 +82,9 @@ class ProfilePlace extends StatelessWidget {
               )
             ],
           ),
-          FloatingActionButtonGreen(),
+          FloatingActionButtonGreen(iconData: Icons.favorite_border, onPressed: (){
+
+          }),
         ],
       ),
     );
