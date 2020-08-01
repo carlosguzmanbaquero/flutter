@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertripsapp/widgets/floating_action_button_green.dart';
+//import 'package:cached_network_image/cached_network_image.dart';
 
 class  CardImageWithFabIcon extends StatelessWidget {
 
@@ -11,6 +12,7 @@ class  CardImageWithFabIcon extends StatelessWidget {
   final String pathImage;
   final VoidCallback onPressedFabIcon;
   final IconData iconData;
+  bool internet = true;
 
   CardImageWithFabIcon({
     Key key,
@@ -19,7 +21,8 @@ class  CardImageWithFabIcon extends StatelessWidget {
     @required this.pathImage,
     @required this.iconData,
     @required this.onPressedFabIcon,
-    this.left
+    this.left,
+    this.internet
   });
 
   @override
@@ -41,6 +44,7 @@ class  CardImageWithFabIcon extends StatelessWidget {
             image: pathImage.contains('assets')?
             AssetImage(pathImage):pathImage.contains('http')?
             NetworkImage(pathImage): new FileImage(new File(pathImage))
+            //image: internet?CachedNetworkImageProvider(pathImage):AssetImage(pathImage)
         ),
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
         shape: BoxShape.rectangle,

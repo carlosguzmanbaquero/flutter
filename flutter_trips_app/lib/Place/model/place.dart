@@ -6,7 +6,8 @@ class Place {
   final String name;
   final String description;
   final String urlImage;
-  final int likes;
+  int likes;
+  bool liked;
   //final User userOwner;
 
   Place({
@@ -16,5 +17,7 @@ class Place {
     @required this.description,
     @required this.urlImage,
     this.likes,
+    this.liked,
+    this.id
     /*@required this.userOwner*/});
 }

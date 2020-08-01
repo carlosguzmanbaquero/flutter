@@ -18,7 +18,7 @@ class _FlutterTrips extends State<FlutterTrips>{
 
   int indexTab=0;
   final List<Widget> widgetsChildren = [
-    HomeTrips(),
+    BlocProvider <UserBloc>(child: HomeTrips(), bloc: UserBloc()),
     SearchTrips(),
     BlocProvider <UserBloc>(child: ProfileTrips(), bloc: UserBloc())
   ];

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,13 +22,21 @@ class UserBloc implements Bloc{
   Future<FirebaseUser> get currentUser => FirebaseAuth.instance.currentUser();
   Stream<QuerySnapshot> placesListStream= Firestore.instance.collection(CloudFirestoreAPI().PLACES).snapshots();
   Stream<QuerySnapshot> get placesStream => placesListStream;
-  List<CardImageWithFabIcon> buildPlaces(List<DocumentSnapshot> placesListSnapshot)=>_cloudFirestoreRepository.buildPlaces(placesListSnapshot);
+  //List<CardImageWithFabIcon> buildPlaces(List<DocumentSnapshot> placesListSnapshot)=>_cloudFirestoreRepository.buildPlaces(placesListSnapshot);
+  List<Place> buildPlaces(List placesListSnapshot, User user) =>_cloudFirestoreRepository.buildPlaces(placesListSnapshot, user);
+  StreamController<Place> placeSelectedStreamController = StreamController<Place>.broadcast();
+  Stream get placeSelectedStream => placeSelectedStreamController.stream;
+  StreamSink get placeSelectedSink =>  placeSelectedStreamController.sink;
+
 
   Stream<QuerySnapshot> myPlacesListStream(String uid) =>
       Firestore.instance.collection(CloudFirestoreAPI().PLACES)
       .where("userOwner", isEqualTo: Firestore.instance.document("${CloudFirestoreAPI().USERS}/${uid}"))
           .snapshots();
   List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesListSnapshot)=>_cloudFirestoreRepository.buildMyPlaces(placesListSnapshot);
+
+  Future likePlace(Place place, String uid) => _cloudFirestoreRepository.likePlace(place,uid);
+
   //casos de uso
   //1. loguearse con google
   Future<FirebaseUser> signIn(){
@@ -48,13 +57,9 @@ class UserBloc implements Bloc{
   _auth_repository.signOut();
   }
 
-
-
   final _firebaseStorageRepository= FirebaseStoraRepository();
   Future<StorageUploadTask> uploadFile(String path, File image)=>
       _firebaseStorageRepository.uploadFile(path, image);
-
-
 
   @override
   void dispose() {

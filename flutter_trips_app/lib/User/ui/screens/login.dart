@@ -34,8 +34,8 @@ class _Login extends State<Login> {
        if(!snapshot.hasData || snapshot.hasError){
          return signInGoogleUI();
        }else{
-         return FlutterTrips();
-         //return FlutterTripsCupertino();
+         //return FlutterTrips();
+          return FlutterTripsCupertino();
        }
      },
    ); 
