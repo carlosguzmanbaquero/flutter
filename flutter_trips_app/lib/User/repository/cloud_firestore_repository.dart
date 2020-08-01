@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertripsapp/Place/model/place.dart';
+import 'package:fluttertripsapp/Place/ui/widgets/card_image.dart';
 import 'package:fluttertripsapp/User/model/user.dart';
 import 'package:fluttertripsapp/User/repository/cloud_firestore_api.dart';
+import 'package:fluttertripsapp/User/ui/widgets/profile_place.dart';
 
 class CloudFirestoreRepository{
   final _cloudFirestoreAPI = CloudFirestoreAPI();
@@ -11,4 +13,6 @@ class CloudFirestoreRepository{
   }
 
   Future <void> updatePlaceData(Place place) => _cloudFirestoreAPI.updatePlaceData(place);
+  List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesListSnapshot)=>_cloudFirestoreAPI.buildMyPlaces(placesListSnapshot);
+  List<CardImageWithFabIcon> buildPlaces(List<DocumentSnapshot> placesListSnapshot)=> _cloudFirestoreAPI.buildPlaces(placesListSnapshot);
 }

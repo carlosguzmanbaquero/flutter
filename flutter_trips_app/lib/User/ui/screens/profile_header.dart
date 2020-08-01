@@ -7,12 +7,16 @@ import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
 class ProfileHeader extends StatelessWidget {
 
-  UserBloc userBloc;
+  //UserBloc userBloc;
   User user;
+  AsyncSnapshot snapshot;
+
+  ProfileHeader(@required this.snapshot){
+  }
 
   @override
   Widget build(BuildContext context) {
-
+/*
     userBloc = BlocProvider.of<UserBloc>(context);
 
     return StreamBuilder(
@@ -30,6 +34,8 @@ class ProfileHeader extends StatelessWidget {
         }
       },
     );
+*/
+    return showProfileData(snapshot);
   }
 
   Widget showProfileData(AsyncSnapshot snapshot){
